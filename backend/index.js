@@ -1,0 +1,32 @@
+//index.js
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const connection = require("./config/db");
+const headlineRoutes = require('./Routes/Headline.routes');
+require("dotenv").config();
+
+const app = express();
+app.use(
+  cors({
+    origin: "*"
+  })
+);
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to Headline backend api");
+});
+
+app.use('/headlines', headlineRoutes);
+
+
+app.listen(process.env.PORT, async () => {
+  try {
+    console.log("listening on port " + process.env.PORT);
+    await connection;
+    console.log("succefully connnected to mongoDb atlas");
+  } catch (error) {
+    console.log(error);
+  }
+});
