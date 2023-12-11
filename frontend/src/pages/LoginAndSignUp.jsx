@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import axios from "axios"; // Import axios library
+import axios from "axios";
 
 function LoginAndSignUp() {
   const [isSignIn, setIsSignIn] = useState(false);
@@ -42,24 +42,21 @@ function LoginAndSignUp() {
     e.preventDefault();
 
     if (isSignIn) {
-      // Handle Login
       if (!userDetails.password) {
         return toast.error("Please fill the password");
       } else if (!userDetails.email) {
         return toast.error("Please fill the email");
       } else {
         try {
-          const response = await axios.post(
-            "http://localhost:8080/user/login",
+          await axios.post(
+            "https://headline-api.onrender.com/user/login",
             userDetails
           );
-
-          // Handle successful login
           toast.success("Login successful", {
             position: "top-center"
           });
-          console.log("headline")
-          navigate("/headline"); // Redirect to /headline after login
+          console.log("headline");
+          navigate("/headline");
         } catch (error) {
           // Handle login error
           toast.error("Login failed. Please check your credentials.");
@@ -70,18 +67,15 @@ function LoginAndSignUp() {
       if (isAllPresent(userDetails.password)) {
         if (userDetails.full_name && userDetails.email) {
           try {
-            const response = await axios.post(
-              "http://localhost:8080/user/signup",
+            await axios.post(
+              "https://headline-api.onrender.com/user/signup",
               userDetails
             );
-
-            // Handle successful signup
             toast.success("Successfully Registered user", {
               position: "top-center"
             });
             handleToggleSignIn(true);
           } catch (error) {
-            // Handle signup error
             toast.error("Signup failed. Please try again.");
           }
         } else {

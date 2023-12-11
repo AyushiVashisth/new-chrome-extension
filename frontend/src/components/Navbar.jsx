@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { RiMenuLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
-import { FaCar, FaList, FaSignOutAlt } from "react-icons/fa";
-import axios from "axios"; // Import axios library
+import { FaCar, FaSignOutAlt } from "react-icons/fa";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isAuth, setIsAuth] = useState(false); // Local state for authentication
+  const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
 
   const toggleMenu = () => {
@@ -19,14 +19,13 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      // Make a request to your logout endpoint
-      await axios.post("your_logout_endpoint");
+      await axios.post("https://headline-api.onrender.com/user/login");
 
-      setIsAuth(false); // Update local state to reflect logout
+      setIsAuth(false);
       toast.success("Logout successful", {
         position: "top-center"
       });
-      navigate("/signin");
+      navigate("/headline");
     } catch (error) {
       toast.error("Logout failed. Please try again.");
     }
@@ -79,10 +78,9 @@ const Navbar = () => {
             </div>
           )}
         </div>
-        {/* Additional content for larger screens */}
         <div className={`hidden sm:flex justify-center bg-gray-900`}>
           <Link
-            to="/deals"
+            to="/headline"
             className="text-orange-400 hover:text-orange-300 ml-4"
           >
             Headline

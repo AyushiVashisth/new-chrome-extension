@@ -3,6 +3,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const connection = require("./config/db");
+const { userRouter } = require("./Routes/Users.routes");
+
 const headlineRoutes = require('./Routes/Headline.routes');
 require("dotenv").config();
 
@@ -17,6 +19,8 @@ app.use(express.json());
 app.get("/", (req, res) => {
   res.status(200).send("Welcome to Headline backend api");
 });
+
+app.use("/user", userRouter); //login and signup
 
 app.use('/headlines', headlineRoutes);
 

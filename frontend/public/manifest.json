@@ -5,9 +5,8 @@
   "version": "1.0",
   "description": "Change headlines on Indian newspaper sites.",
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "apiBackground.js"
   },
-  
   "permissions": [
     "activeTab",
     "storage"
@@ -25,7 +24,7 @@
         "*://*.indiannewssite.com/*"
       ],
       "js": [
-        "contentScript.js"
+        "script.js"
       ]
     }
   ],
